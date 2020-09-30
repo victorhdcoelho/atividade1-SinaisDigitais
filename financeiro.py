@@ -30,14 +30,14 @@ class AIFinancial:
             sns.heatmap(self.df_test[filters].corr(), annot=True)
 
     def kmeans_cluster(self, num):
-        retornos = self.df[self.df.columns].pct_change()
+        retornos = 100 * self.df[self.df.columns].pct_change()
         test_col = [
             each for each in self.df.columns if each in self.df_test.columns]
         retornos_test = self.df_test[test_col].pct_change()
         stocks = retornos.columns
-        X = 100*np.array([[np.std(retornos[sto]),
+        X = np.array([[np.std(retornos[sto]),
                            np.mean(retornos[sto])] for sto in stocks])
-        X_test = 100 * np.array([[np.std(retornos_test[sto]),
+        X_test = np.array([[np.std(retornos_test[sto]),
                                   np.mean(retornos_test[sto])]
                                  for sto in test_col])
         N = num
@@ -174,7 +174,7 @@ class FinancialData:
         sharpes = {}
         df = 100 * df.diff()/df.iloc[0]
         for active in df.columns:
-            sharpes[active] = ((df[active].mean()-0.5)/df[active].std())
+            sharpes[active] = ((df[active].mean())/df[active].std())
 
         return sharpes
 

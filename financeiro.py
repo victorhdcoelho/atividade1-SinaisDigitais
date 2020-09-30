@@ -131,23 +131,20 @@ class FinancialData:
         train = {}
         train_v = {}
         test = {}
-        print("Get Train Data")
         for each in data.keys():
             print("FUNDO: {}".format(each))
             actives = ["{}.SA".format(x) for x in data[each]]
             train_v[each] = self.extract_volumes_from_actives(actives,
                                                               train_date,
                                                               "yahoo")
-            train[each] = self.extract_data_from_actives(actives,
-                                                         train_date,
-                                                         "yahoo")
-        print("Get Test Data")
-        for each in data.keys():
-            print("FUNDO: {}".format(each))
-            actives = ["{}.SA".format(x) for x in data[each]]
+
             test[each] = self.extract_data_from_actives(actives,
                                                         test_date,
                                                         "yahoo")
+
+            train[each] = self.extract_data_from_actives(actives,
+                                                         train_date,
+                                                         "yahoo")
         return train, test, train_v
 
     def plot_data_segmentation(self, df, column=None):

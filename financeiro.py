@@ -172,7 +172,7 @@ class FinancialData:
 
     def get_sharpes(self, df):
         sharpes = {}
-        df = df.pct_change() * 100
+        df = 100 * df.diff()/df.iloc[0]
         for active in df.columns:
             sharpes[active] = ((df[active].mean()-0.5)/df[active].std())
 

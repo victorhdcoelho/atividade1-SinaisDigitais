@@ -42,7 +42,7 @@ class AIFinancial:
                                  for sto in test_col])
         N = num
         kmeans = KMeans(n_clusters=N, random_state=0).fit(X)
-        y_kmeans = kmeans.predict(X_test)
+        y_kmeans = kmeans.predict(X)
         fig = plt.subplots(figsize=(20, 5))
         ax1 = plt.subplot(1, 1, 1)
         ax1.scatter(X[:, 0], X[:, 1], c=y_kmeans, s=50, cmap='viridis')
